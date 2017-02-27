@@ -15,7 +15,7 @@ namespace Harjoitus_4
                 noppa.Heita();
                 Console.WriteLine("Nopan silmäluku: {0}", noppa.NaytaLukema());
                 heitot += noppa.NaytaLukema();
-                Console.Write("Heitetaanko viela (kyllä/ei)? ");
+                Console.Write("Heitetäänkö vielä (kyllä/ei)? ");
                 if (Console.ReadLine().Equals("ei", StringComparison.OrdinalIgnoreCase))
                 {
                     Console.WriteLine("Heittojen määrä on {0}.", noppa.NaytaHeittojenMaara());
