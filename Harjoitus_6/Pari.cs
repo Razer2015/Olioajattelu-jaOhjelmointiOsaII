@@ -8,8 +8,7 @@ namespace Harjoitus_6
 {
     class Pari<T> : IPari<T>
     {
-        T _A;
-        T _B;
+        T _A, _B;
 
         public T A
         {
@@ -51,7 +50,5 @@ namespace Harjoitus_6
         {
             return A + ", " + B;
         }
-
-
     }
 }
