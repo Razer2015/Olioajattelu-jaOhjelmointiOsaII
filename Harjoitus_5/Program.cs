@@ -57,7 +57,7 @@ namespace Harjoitus_5
 
         static bool DoubleTesti(out double result, int tarkkuus = -1) {
             try {
-                result = Helpers.Syote.Desimaaliluku($"Anna desimaaliluku väliltä: ", tarkkuus);
+                result = Helpers.Syote.Desimaaliluku($"Anna desimaaliluku: ", tarkkuus);
                 return (true);
             }
             catch (ApplicationException appException) {

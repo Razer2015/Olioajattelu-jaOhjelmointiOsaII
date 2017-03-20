@@ -26,7 +26,8 @@ namespace Helpers
         int Vv { get; set; }
         bool Arki { get; set; }
 
-        public Paivays(int pp, int kk, int vv, bool arki) {
+        public Paivays(int pp, int kk, int vv, bool arki)
+        {
             DateTime result;
             if (!DateTime.TryParse($"{pp}.{kk}.{vv}", out result))
                 throw new ApplicationException("Päiväys-oliota ei voitu tehdä.");
@@ -39,12 +40,15 @@ namespace Helpers
         public Paivays(int pp, int kk, int vv)
             : this(pp, kk, vv, true) { }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return ($"{Pp}.{Kk}.{Vv}");
         }
 
-        public string ToString(PaivaysMuoto paivaysMuoto) {
-            switch (paivaysMuoto) {
+        public string ToString(PaivaysMuoto paivaysMuoto)
+        {
+            switch (paivaysMuoto)
+            {
                 case PaivaysMuoto.Usa:
                     return ($"{Kk}/{Pp}/{Vv}");
                 case PaivaysMuoto.Ranska:
@@ -62,7 +66,8 @@ namespace Helpers
             }
         }
 
-        public bool OnkoUudempiKuin(Paivays paivays) {
+        public bool OnkoUudempiKuin(Paivays paivays)
+        {
             if ((this.Vv > paivays.Vv) ||
                 (this.Vv == paivays.Vv && this.Kk > paivays.Kk) ||
                 (this.Vv == paivays.Vv && this.Kk == paivays.Kk && this.Pp > paivays.Pp))
@@ -71,7 +76,8 @@ namespace Helpers
                 return (false);
         }
 
-        public bool OnkoVanhempiKuin(Paivays paivays) {
+        public bool OnkoVanhempiKuin(Paivays paivays)
+        {
             if ((this.Vv < paivays.Vv) ||
                 (this.Vv == paivays.Vv && this.Kk < paivays.Kk) ||
                 (this.Vv == paivays.Vv && this.Kk == paivays.Kk && this.Pp < paivays.Pp))
@@ -80,18 +86,21 @@ namespace Helpers
                 return (false);
         }
 
-        public bool OnkoSamaKuin(Paivays paivays) {
+        public bool OnkoSamaKuin(Paivays paivays)
+        {
             if ((this.Vv == paivays.Vv) && (this.Kk == paivays.Kk) && (this.Pp == paivays.Pp))
                 return (true);
             else
                 return (false);
         }
 
-        public static Paivays Parse(DateTime dt) {
+        public static Paivays Parse(DateTime dt)
+        {
             return (new Paivays(dt.Day, dt.Month, dt.Year, ((dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday) ? false : true)));
         }
 
-        public static Paivays Parse(string pvm) {
+        public static Paivays Parse(string pvm)
+        {
             DateTime dt;
             if (DateTime.TryParseExact(pvm, "dd.MM.yyyy", new CultureInfo("fi-FI"), DateTimeStyles.None, out dt))
                 return (new Paivays(dt.Day, dt.Month, dt.Year, ((dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday) ? false : true)));
@@ -99,10 +108,12 @@ namespace Helpers
                 throw new ApplicationException("Päiväyksen muoto virheellinen.");
         }
 
-        public static Paivays Parse(string pvm, PaivaysMuoto paivaysMuoto) {
+        public static Paivays Parse(string pvm, PaivaysMuoto paivaysMuoto)
+        {
             string[] formats = null;
             CultureInfo culture = null;
-            switch (paivaysMuoto) {
+            switch (paivaysMuoto)
+            {
                 case PaivaysMuoto.Usa:
                     formats = new string[] { "M/d/yyyy", "MM/d/yyyy", "MM/dd/yyyy" };
                     culture = new CultureInfo("en-US");
@@ -135,6 +146,71 @@ namespace Helpers
                 return (new Paivays(dt.Day, dt.Month, dt.Year, ((dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday) ? false : true)));
             else
                 throw new ApplicationException("Päiväyksen muoto virheellinen.");
+        }
+
+        private static Viikko TeeViikko(int vuosi, int nro, DateTime alku)
+        {
+            var viikko = new Viikko(nro, vuosi);
+            for (int i = 0; i < viikko.Paivat.Length; i++)
+            {
+                viikko.Paivat[i] = Paivays.Parse(alku.AddDays(i));
+            }
+            return (viikko);
+        }
+
+        public static Viikko[] VuodenViikot(int vuosi)
+        {
+            List<Viikko> viikot = new List<Viikko>();
+            DateTime alku = default(DateTime);
+            for (int i = 1; i < 54; i++)
+            {
+                if (alku == default(DateTime))
+                {
+                    alku = new DateTime(vuosi, 1, 1);
+                    switch (alku.DayOfWeek)
+                    {
+                        case DayOfWeek.Tuesday:
+                            alku = alku.AddDays(-1);
+                            break;
+                        case DayOfWeek.Wednesday:
+                            alku = alku.AddDays(-2);
+                            break;
+                        case DayOfWeek.Thursday:
+                            alku = alku.AddDays(-3);
+                            break;
+                        case DayOfWeek.Friday:
+                            alku = alku.AddDays(3);
+                            break;
+                        case DayOfWeek.Saturday:
+                            alku = alku.AddDays(2);
+                            break;
+                        case DayOfWeek.Sunday:
+                            alku = alku.AddDays(1);
+                            break;
+                    }
+                }
+                if(i > 1)
+                    alku = alku.AddDays(7);
+                viikot.Add(TeeViikko(vuosi, i, alku));
+                if (alku.AddDays(10).Year > vuosi)
+                    break;
+            }
+            return (viikot.ToArray());
+        }
+
+        public static Paivays[] VuodenPaivaykset(int vuosi)
+        {
+            Paivays[] paivat = new Paivays[(DateTime.IsLeapYear(vuosi) ? 366 : 365)];
+            int index = 0;
+            for (int i = 1; i < 13; i++)
+            {
+                var daysInMonth = DateTime.DaysInMonth(vuosi, i);
+                for (int j = 1; j < (daysInMonth + 1); j++)
+                {
+                    paivat[index++] = Paivays.Parse(new DateTime(vuosi, i, j));
+                }
+            }
+            return (paivat);
         }
     }
 }
