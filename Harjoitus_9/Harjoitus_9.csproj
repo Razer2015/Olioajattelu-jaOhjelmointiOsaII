@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0AABBE2E-47BA-400F-BE41-389068301E63}</ProjectGuid>
+    <ProjectGuid>{70CD4A86-EFA0-4425-87C2-46074F685D6C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Harjoitus_8</RootNamespace>
-    <AssemblyName>Harjoitus_8</AssemblyName>
+    <RootNamespace>Harjoitus_9</RootNamespace>
+    <AssemblyName>Harjoitus_9</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,8 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lintu.cs" />
+    <Compile Include="Nelio.cs" />
+    <Compile Include="Pelikaani.cs" />
+    <Compile Include="PiirtoElementti.cs" />
+    <Compile Include="Piste.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Viiva.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

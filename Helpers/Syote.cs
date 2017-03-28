@@ -83,15 +83,13 @@ namespace Helpers
             throw new ApplicationException("Syöte ei ole kelvollinen päiväys.");
         }
 
-        public static int KokonaislukuPakottaen()
+        public static int KokonaislukuPakottaen(string kehote = null, int min = int.MinValue, int max = int.MaxValue)
         {
-            int min = int.MinValue;
-            int max = int.MaxValue;
             int result;
             while (true)
                 try
                 {
-                    result = Helpers.Syote.Kokonaisluku($"Anna kokonaisluku{((min != int.MinValue || max != int.MaxValue) ? $" väliltä {min}-{max}" : "")}: ", min, max);
+                    result = Helpers.Syote.Kokonaisluku(kehote ?? $"Anna kokonaisluku{((min != int.MinValue || max != int.MaxValue) ? $" väliltä {min}-{max}" : "")}: ", min, max);
                     return (result);
                 }
                 catch (ApplicationException appException)
@@ -100,13 +98,13 @@ namespace Helpers
                 }
         }
 
-        public static double DesimaalilukuPakottaen()
+        public static double DesimaalilukuPakottaen(string kehote = null)
         {
             double result;
             while (true)
                 try
                 {
-                    result = Helpers.Syote.Desimaaliluku($"Anna desimaaliluku: ");
+                    result = Helpers.Syote.Desimaaliluku(kehote ?? $"Anna desimaaliluku: ");
                     return (result);
                 }
                 catch (ApplicationException appException)
@@ -151,13 +149,13 @@ namespace Helpers
                 }
         }
 
-        public static DateTime PaivaysPakottaen()
+        public static DateTime PaivaysPakottaen(string kehote = null)
         {
             DateTime result;
             while (true)
                 try
                 {
-                    result = Helpers.Syote.Paivays($"Anna päivämäärä: ");
+                    result = Helpers.Syote.Paivays(kehote ?? $"Anna päivämäärä: ");
                     return (result);
                 }
                 catch (ApplicationException appException)

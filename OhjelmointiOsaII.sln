@@ -27,6 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harjoitus_8", "Harjoitus_8\
 		{44B64A3D-B743-43BB-9357-49C17379C506} = {44B64A3D-B743-43BB-9357-49C17379C506}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harjoitus_9", "Harjoitus_9\Harjoitus_9.csproj", "{70CD4A86-EFA0-4425-87C2-46074F685D6C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{44B64A3D-B743-43BB-9357-49C17379C506} = {44B64A3D-B743-43BB-9357-49C17379C506}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +74,10 @@ Global
 		{0AABBE2E-47BA-400F-BE41-389068301E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AABBE2E-47BA-400F-BE41-389068301E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AABBE2E-47BA-400F-BE41-389068301E63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70CD4A86-EFA0-4425-87C2-46074F685D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70CD4A86-EFA0-4425-87C2-46074F685D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70CD4A86-EFA0-4425-87C2-46074F685D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70CD4A86-EFA0-4425-87C2-46074F685D6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
