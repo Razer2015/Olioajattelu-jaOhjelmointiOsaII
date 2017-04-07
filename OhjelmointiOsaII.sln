@@ -33,6 +33,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harjoitus_9", "Harjoitus_9\
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harjoitus_10", "Harjoitus_10\Harjoitus_10.csproj", "{54C897B3-D095-4AF8-B9C6-8A7D326354E3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{44B64A3D-B743-43BB-9357-49C17379C506} = {44B64A3D-B743-43BB-9357-49C17379C506}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

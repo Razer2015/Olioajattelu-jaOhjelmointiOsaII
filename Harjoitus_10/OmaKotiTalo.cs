@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Harjoitus_10
 {
@@ -39,8 +36,8 @@ namespace Harjoitus_10
         public override void TulostaTiedot()
         {
             Console.WriteLine("Omakotitalo\nkohde: {0}\nosoite: {1}\nrakennusvuosi: {2}\nhinta: {3}\noma tontti: {4}\ntontin koko: {5}", 
-                this.KohdeId, this.Osoite.ToString(), this.RakennusVuosi, this.Hinta.ToString("0,##"), 
-                ((this.OmaTontti) ? "kyllä" : "ei"), this.TontinKoko.ToString("0,##") + " m2");
+                this.KohdeId, this.Osoite.ToString(), this.RakennusVuosi, this.Hinta.ToString("#.00", CultureInfo.CurrentCulture), 
+                ((this.OmaTontti) ? "kyllä" : "ei"), this.TontinKoko.ToString("#.00", CultureInfo.CurrentCulture) + " m2");
         }
     }
 }

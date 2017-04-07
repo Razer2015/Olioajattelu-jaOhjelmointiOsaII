@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Harjoitus_10
 {
@@ -11,7 +8,7 @@ namespace Harjoitus_10
         public int Kerros { get; set; }
         public double YhtioVastike { get; set; }
 
-        string KohdeId
+        public string KohdeId
         {
             get
             {
@@ -23,9 +20,9 @@ namespace Harjoitus_10
             set { this._kohdeId = value; }
         }
 
-        Osoite Osoite { get { return (this._osoite); } set { this._osoite = value; } }
-        int RakennusVuosi { get { return (this._rakennusVuosi); } set { this._rakennusVuosi = value; } }
-        double Hinta { get { return (this._arvo); } set { this._arvo = value; } }
+        public Osoite Osoite { get { return (this._osoite); } set { this._osoite = value; } }
+        public int RakennusVuosi { get { return (this._rakennusVuosi); } set { this._rakennusVuosi = value; } }
+        public double Hinta { get { return (this._arvo); } set { this._arvo = value; } }
 
         public OsakeHuoneisto(Osoite osoite)
             : base(osoite)
@@ -36,8 +33,8 @@ namespace Harjoitus_10
         public override void TulostaTiedot()
         {
             Console.WriteLine("Osakehuoneisto\nkohde: {0}\nosoite: {1}\nrakennusvuosi: {2}\nhinta: {3}\nkerros: {4}\nyhtiövastike: {5}",
-                this.KohdeId, this.Osoite.ToString(), this.RakennusVuosi, Math.Round(this.Hinta, 2),
-                this.Kerros, this.YhtioVastike.ToString("0.##") + " / kk");
+                this.KohdeId, this.Osoite.ToString(), this.RakennusVuosi, this.Hinta.ToString("#.00", CultureInfo.CurrentCulture),
+                this.Kerros, this.YhtioVastike.ToString("#.00", CultureInfo.CurrentCulture) + " / kk");
         }
     }
 }

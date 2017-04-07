@@ -1,9 +1,5 @@
 ﻿using Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Harjoitus_10
 {
@@ -34,13 +30,26 @@ namespace Harjoitus_10
             }
             else // OsakeHuoneisto
             {
-
+                var katuOsoite = Syote.Merkkijono("Anna katuosoite: ");
+                var postiNumero = Syote.Merkkijono("Anna postinumero: ");
+                var postiToimiPaikka = Syote.Merkkijono("Anna postitoimipaikka: ");
+                var rakennusVuosi = Syote.KokonaislukuPakottaen("Rakennusvuosi: ", 0, 2017);
+                var hinta = Syote.DesimaalilukuPakottaen("Hinta: ");
+                var kerros = Syote.KokonaislukuPakottaen("Kerros: ", 1, int.MaxValue);
+                var yhtioVastike = Syote.DesimaalilukuPakottaen("Yhtiövastike (kk): ");
+                osakeHuoneisto = new OsakeHuoneisto(new Osoite() { Katuosoite = katuOsoite, Postinro = postiNumero, Postitoimipaikka = postiToimiPaikka });
+                osakeHuoneisto.RakennusVuosi = rakennusVuosi;
+                osakeHuoneisto.Hinta = hinta;
+                osakeHuoneisto.Kerros = kerros;
+                osakeHuoneisto.YhtioVastike = yhtioVastike;
             }
 
+            Console.WriteLine(); // Extra väli
             if (omaKotiTalo != null)
                 omaKotiTalo.TulostaTiedot();
             if (osakeHuoneisto != null)
                 osakeHuoneisto.TulostaTiedot();
+
             Console.ReadLine();
         }
     }
